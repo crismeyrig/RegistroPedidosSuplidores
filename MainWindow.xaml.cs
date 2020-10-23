@@ -29,14 +29,19 @@ namespace RegistroPedidosSuplidores
         }
         private void RegistroOrdenesButton_Click(object sender, RoutedEventArgs e)
         {
-            rOrdenes rOrdenes1 = new rOrdenes();
-            rOrdenes1.Show();
+            rPedidos rPedidos = new rPedidos();
+            rPedidos.Show();
 
         }
         private void ConsultaOrdenesButton_Click(object sender, RoutedEventArgs e)
         {
-            cOrdenes cOrdeness1 = new cOrdenes();
-            cOrdenes1.Show();
+            cPedidos cPedidos = new cPedidos();
+            cPedidos.Show(); 
+
+        }
+
+        private void AyudaMenu_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

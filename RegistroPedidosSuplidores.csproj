@@ -13,13 +13,17 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <Content Include="Imagenes\*.*" >
+
+    <!-- Imagenes -->
+    <Content Include="Imagenes\*.*">
     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    
   </ItemGroup>
-   <ItemGroup>
 
+  <ItemGroup>
     <Folder Include="Data\" />
   </ItemGroup>
+  
 
 </Project>

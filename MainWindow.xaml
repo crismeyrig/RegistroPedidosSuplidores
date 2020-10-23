@@ -9,9 +9,8 @@
     <Grid>
     <Menu Height="20" VerticalAlignment="Top">
             <MenuItem Header="Registros">
-                <MenuItem x:Name="RegistroOrdenes" Header="Registro Ordenes" Click="RegistroOrdenesButton_Click"></MenuItem>
-               
-
+                <MenuItem x:Name="RegistroOrdenes" Header="Registro Ordenes" Click="RegistroOrdenesButton_Click"/>
+            
             </MenuItem>
 
             <MenuItem Header="Consultas">
