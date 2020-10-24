@@ -32,8 +32,7 @@
                     <TextBox x:Name="CriterioTextBox" Width="95" Height="24" Margin="0,0,5,0"/>
 
                 </StackPanel>
-
-                <Button x:Name="BuscarButton" Height="24" Width="95" Click="ConsultarButton_Click" >
+                <Button x:Name="BuscarButton" Height="34" Width="95" Margin="4,9,7,0" Click="ConsultarButton_Click" >
                     <StackPanel Orientation="Horizontal" Margin="5,0" >
                         <Image Source="/Imagenes/Buscar.png" Width="25" Margin="0,0,5,0"  />
                         <Label Content="Consultar" />

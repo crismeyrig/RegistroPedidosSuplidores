@@ -14,6 +14,5 @@ namespace RegistroPedidosSuplidores.Entidades
         public double Inventario { get; set; }
 
 
-
     }
 }

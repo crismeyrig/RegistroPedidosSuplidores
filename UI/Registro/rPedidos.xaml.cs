@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using RegistroPedidosSuplidores.BLL;
 using RegistroPedidosSuplidores.Entidades;
 
+
 namespace RegistroPedidosSuplidores.UI.Registro
 {
     /// <summary>
@@ -39,12 +40,14 @@ namespace RegistroPedidosSuplidores.UI.Registro
         {
             this.DataContext = null;
             this.DataContext = ordenes;
+            SuplidorIdComboBox.SelectedIndex = ordenes.SuplidorId;
         }
        
         private void Limpiar()
         {
             this.ordenes = new Ordenes();
             this.DataContext = ordenes;
+            this.ordenes.Fecha = DateTime.Now;
         }
        
         private bool Validar()
@@ -53,7 +56,7 @@ namespace RegistroPedidosSuplidores.UI.Registro
             if (PedidoIdTextbox.Text.Length == 0)
             {
                 Validado = false;
-                MessageBox.Show("Los datos introducidos son incorrectos, Verifique e intente luego", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Los datos introducidos son incorrectos, Verifique e intente de nuevo", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
             return Validado;
@@ -77,14 +80,23 @@ namespace RegistroPedidosSuplidores.UI.Registro
         }
                private void AgregarFilaButton_Click(object sender, RoutedEventArgs e)
         {
+            if (SuplidorIdComboBox.Text == string.Empty)
+            {
+                MessageBox.Show($"El campo Suplidor Id esta vacio.\n\nSeleccione un Suplidor.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Warning);
+                SuplidorIdComboBox.IsDropDownOpen = true;
+                return;
+            }
+            Productos producto = (Productos)ProductoIdComboBox.SelectedItem;
             var filaDetalle = new OrdenesDetalle
             {
+               
                 OrdenId = this.ordenes.OrdenId,
                 ProductoId = Convert.ToInt32(ProductoIdComboBox.SelectedValue.ToString()),
                 productos = (Productos)ProductoIdComboBox.SelectedItem,
                 Cantidad = Convert.ToInt32(CantidadTextBox.Text)
             };
-
+           
+           ordenes.Monto = producto.Costo * int.Parse(CantidadTextBox.Text);
             this.ordenes.Detalle.Add(filaDetalle);
             Cargar();
 
@@ -96,6 +108,9 @@ namespace RegistroPedidosSuplidores.UI.Registro
         {
             if (DetalleDataGrid.Items.Count >= 1 && DetalleDataGrid.SelectedIndex <= DetalleDataGrid.Items.Count - 1)
             {
+                 var detalle = (OrdenesDetalle)DetalleDataGrid.SelectedItem;
+
+                ordenes.Monto = ordenes.Monto - (detalle.productos.Costo * (int)detalle.Cantidad);
                 ordenes.Detalle.RemoveAt(DetalleDataGrid.SelectedIndex);
                 Cargar();
             }
