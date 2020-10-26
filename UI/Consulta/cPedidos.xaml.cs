@@ -26,19 +26,16 @@ namespace RegistroPedidosSuplidores.UI.Consulta
 
         private void ConsultarButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Ordenes> listado = new List<Ordenes>();
+
+     List<Ordenes> listado = new List<Ordenes>();
 
             if (CriterioTextBox.Text.Trim().Length > 0)
             {
                 switch (FiltroComboBox.SelectedIndex)
                 {
-                    case 0:
+                    case 1:
                         listado = OrdenesBLL.GetList(p => p.OrdenId == Utilidades.ToInt(CriterioTextBox.Text));
                         break;
-
-                        //case 1:
-                        //    listado = OrdenesBLL.GetList(p => p..Contains(CriterioTextBox.Text, StringComparison.OrdinalIgnoreCase));
-                        //    break;
                 }
             }
             else
@@ -47,6 +44,7 @@ namespace RegistroPedidosSuplidores.UI.Consulta
             }
             if (DesdeDatePicker.SelectedDate != null)
                 listado = (List<Ordenes>)OrdenesBLL.GetList(p => p.Fecha.Date >= DesdeDatePicker.SelectedDate);
+            
             if (HastaDatePicker.SelectedDate != null)
                 listado = (List<Ordenes>)OrdenesBLL.GetList(p => p.Fecha.Date <= HastaDatePicker.SelectedDate);
 
@@ -55,3 +53,4 @@ namespace RegistroPedidosSuplidores.UI.Consulta
         }
     }
 }
+

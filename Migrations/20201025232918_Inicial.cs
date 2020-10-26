@@ -65,7 +65,8 @@ namespace RegistroPedidosSuplidores.Migrations
                     OrdenId = table.Column<int>(nullable: false),
                     ProductoId = table.Column<int>(nullable: false),
                     Cantidad = table.Column<int>(nullable: false),
-                    SuplidorId = table.Column<int>(nullable: false)
+                    SuplidorId = table.Column<int>(nullable: false),
+                    Costo = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

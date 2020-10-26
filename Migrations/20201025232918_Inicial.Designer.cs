@@ -9,7 +9,7 @@ using RegistroPedidosSuplidores.DAL;
 namespace RegistroPedidosSuplidores.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20201022221431_Inicial")]
+    [Migration("20201025232918_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,6 +48,9 @@ namespace RegistroPedidosSuplidores.Migrations
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("INTEGER");
+
+                    b.Property<double>("Costo")
+                        .HasColumnType("REAL");
 
                     b.Property<int>("OrdenId")
                         .HasColumnType("INTEGER");

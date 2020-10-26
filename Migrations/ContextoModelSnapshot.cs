@@ -47,6 +47,9 @@ namespace RegistroPedidosSuplidores.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("INTEGER");
 
+                    b.Property<double>("Costo")
+                        .HasColumnType("REAL");
+
                     b.Property<int>("OrdenId")
                         .HasColumnType("INTEGER");
 

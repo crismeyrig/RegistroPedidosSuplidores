@@ -53,15 +53,16 @@ namespace RegistroPedidosSuplidores.UI.Registro
         private bool Validar()
         {
             bool Validado = true;
+            
             if (PedidoIdTextbox.Text.Length == 0)
             {
                 Validado = false;
-                MessageBox.Show("Los datos introducidos son incorrectos, Verifique e intente de nuevo", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(" Debe ingresar el id pedido, Verifique e intente de nuevo", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
             return Validado;
         }
-              private void BuscarButton_Click(object sender, RoutedEventArgs e)
+        private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
             Ordenes encontrado = OrdenesBLL.Buscar(ordenes.OrdenId);
 
@@ -78,15 +79,15 @@ namespace RegistroPedidosSuplidores.UI.Registro
                 PedidoIdTextbox.Focus();
             }
         }
-               private void AgregarFilaButton_Click(object sender, RoutedEventArgs e)
+        private void AgregarFilaButton_Click(object sender, RoutedEventArgs e)
         {
             if (SuplidorIdComboBox.Text == string.Empty)
             {
                 MessageBox.Show($"El campo Suplidor Id esta vacio.\n\nSeleccione un Suplidor.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Warning);
-                SuplidorIdComboBox.IsDropDownOpen = true;
+                 SuplidorIdComboBox.IsDropDownOpen = true;
                 return;
-            }
-            Productos producto = (Productos)ProductoIdComboBox.SelectedItem;
+            } 
+            Productos producto = (Productos)ProductoIdComboBox.SelectedItem; 
             var filaDetalle = new OrdenesDetalle
             {
                
@@ -96,7 +97,7 @@ namespace RegistroPedidosSuplidores.UI.Registro
                 Cantidad = Convert.ToInt32(CantidadTextBox.Text)
             };
            
-           ordenes.Monto = producto.Costo * int.Parse(CantidadTextBox.Text);
+           ordenes.Monto += producto.Costo * int.Parse(CantidadTextBox.Text);
             this.ordenes.Detalle.Add(filaDetalle);
             Cargar();
 
@@ -104,7 +105,7 @@ namespace RegistroPedidosSuplidores.UI.Registro
             CantidadTextBox.Clear();
             CantidadTextBox.Focus();
         }
-              private void RemoverFilaButton_Click(object sender, RoutedEventArgs e)
+        private void RemoverFilaButton_Click(object sender, RoutedEventArgs e)
         {
             if (DetalleDataGrid.Items.Count >= 1 && DetalleDataGrid.SelectedIndex <= DetalleDataGrid.Items.Count - 1)
             {
@@ -115,7 +116,7 @@ namespace RegistroPedidosSuplidores.UI.Registro
                 Cargar();
             }
         }
-                private void NuevoButton_Click(object sender, RoutedEventArgs e)
+        private void NuevoButton_Click(object sender, RoutedEventArgs e)
         {
             Limpiar();
         }
@@ -137,7 +138,7 @@ namespace RegistroPedidosSuplidores.UI.Registro
             }
         }
     
-               private void EliminarButton_Click(object sender, RoutedEventArgs e)
+        private void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
             {
                 if (OrdenesBLL.Eliminar(Utilidades.ToInt(PedidoIdTextbox.Text)))
