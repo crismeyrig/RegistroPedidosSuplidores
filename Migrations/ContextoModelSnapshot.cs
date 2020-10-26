@@ -47,9 +47,6 @@ namespace RegistroPedidosSuplidores.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Costo")
-                        .HasColumnType("REAL");
-
                     b.Property<int>("OrdenId")
                         .HasColumnType("INTEGER");
 
@@ -59,11 +56,16 @@ namespace RegistroPedidosSuplidores.Migrations
                     b.Property<int>("SuplidorId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("ventaId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("OrdenDetalle");
 
                     b.HasIndex("OrdenId");
 
                     b.HasIndex("ProductoId");
+
+                    b.HasIndex("ventaId");
 
                     b.ToTable("OrdenesDetalle");
                 });
@@ -190,6 +192,23 @@ namespace RegistroPedidosSuplidores.Migrations
                         });
                 });
 
+            modelBuilder.Entity("RegistroPedidosSuplidores.Entidades.Ventas", b =>
+                {
+                    b.Property<int>("VentaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Monto")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("fecha")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("VentaId");
+
+                    b.ToTable("Ventas");
+                });
+
             modelBuilder.Entity("RegistroPedidosSuplidores.Entidades.Ordenes", b =>
                 {
                     b.HasOne("RegistroPedidosSuplidores.Entidades.Suplidores", "suplidores")
@@ -212,6 +231,10 @@ namespace RegistroPedidosSuplidores.Migrations
                         .HasForeignKey("ProductoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("RegistroPedidosSuplidores.Entidades.Ventas", null)
+                        .WithMany("Detalle")
+                        .HasForeignKey("ventaId");
                 });
 #pragma warning restore 612, 618
         }

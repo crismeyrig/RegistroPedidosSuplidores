@@ -36,6 +36,20 @@ namespace RegistroPedidosSuplidores.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Ventas",
+                columns: table => new
+                {
+                    VentaId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    fecha = table.Column<DateTime>(nullable: false),
+                    Monto = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ventas", x => x.VentaId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Ordenes",
                 columns: table => new
                 {
@@ -66,7 +80,7 @@ namespace RegistroPedidosSuplidores.Migrations
                     ProductoId = table.Column<int>(nullable: false),
                     Cantidad = table.Column<int>(nullable: false),
                     SuplidorId = table.Column<int>(nullable: false),
-                    Costo = table.Column<double>(nullable: false)
+                    ventaId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,6 +97,12 @@ namespace RegistroPedidosSuplidores.Migrations
                         principalTable: "Productos",
                         principalColumn: "ProductoId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrdenesDetalle_Ventas_ventaId",
+                        column: x => x.ventaId,
+                        principalTable: "Ventas",
+                        principalColumn: "VentaId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -169,6 +189,11 @@ namespace RegistroPedidosSuplidores.Migrations
                 name: "IX_OrdenesDetalle_ProductoId",
                 table: "OrdenesDetalle",
                 column: "ProductoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrdenesDetalle_ventaId",
+                table: "OrdenesDetalle",
+                column: "ventaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -181,6 +206,9 @@ namespace RegistroPedidosSuplidores.Migrations
 
             migrationBuilder.DropTable(
                 name: "Productos");
+
+            migrationBuilder.DropTable(
+                name: "Ventas");
 
             migrationBuilder.DropTable(
                 name: "Suplidores");
