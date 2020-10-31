@@ -79,7 +79,7 @@ namespace RegistroPedidosSuplidores.BLL
 
             return paso;
         }
-              public static bool Eliminar(int id)
+        public static bool Eliminar(int id)
         {
             bool paso = false;
             Contexto contexto = new Contexto();
@@ -103,7 +103,7 @@ namespace RegistroPedidosSuplidores.BLL
 
             return paso;
         }
-                public static List<Ordenes> GetList(Expression<Func<Ordenes, bool>> criterio)
+        public static List<Ordenes> GetList(Expression<Func<Ordenes, bool>> criterio)
         {
             List<Ordenes> lista = new List<Ordenes>();
             Contexto contexto = new Contexto();

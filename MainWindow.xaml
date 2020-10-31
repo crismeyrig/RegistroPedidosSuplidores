@@ -20,5 +20,6 @@
 
             <MenuItem Name="AyudaMenu" Header="Ayuda" Click="AyudaMenu_Click"/>
         </Menu>
+        
     </Grid>
 </Window>
